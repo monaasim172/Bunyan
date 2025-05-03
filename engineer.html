@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بنيان - حلول هندسية متكاملة</title>
+    <!-- Bootstrap 5 RTL CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.rtl.min.css">
+    <!-- Google Fonts - Tajawal for Arabic -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #164863;
+            --primary: #427D9D;
+            --primary-light: #9BBEC8;
+            --accent: #D4A762;
+            --accent-light: #F4E9D8;
+            --light: #DDF2FD;
+            --dark: #1A2E40;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.08);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            color: var(--accent);
+            margin-left: 10px;
+            font-size: 2rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(26, 46, 64, 0.9), rgba(26, 46, 64, 0.9)), 
+                        url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 0 6rem;
+            position: relative;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 12px 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-accent:hover {
+            background-color: #c89548;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .service-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .section-title:after {
+            content: "";
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: -10px;
+            right: 0;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            border-radius: 2px;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 300px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card img {
+            transition: transform 0.5s ease;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: linear-gradient(to top, rgba(26, 46, 64, 0.9), transparent);
+            padding: 20px;
+            color: white;
+            transform: translateY(100px);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        .stats-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stats-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .client-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-light);
+        }
+
+        .cta-section {
+            background: linear-gradient(rgba(26, 46, 64, 0.9), rgba(26, 46, 64, 0.9)), 
+                        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            position: relative;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            position: relative;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 6rem 0;
+                text-align: center;
+            }
+            
+            .section-title:after {
+                width: 100%;
+                right: 0;
+            }
+        }
+        /* Additional Projects Styling */
+#more-projects {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#show-more-projects {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    padding-right: 40px;
+}
+
+#show-more-projects:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+#show-more-projects:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid white;
+    transition: all 0.3s ease;
+}
+
+#show-more-projects.active:after {
+    transform: translateY(-50%) rotate(180deg);
+}
+        
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <span class="logo">
+                    بنيان
+                    <i class="fas fa-building logo-icon"></i>
+                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">خدماتنا</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">مشاريعنا</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">عن الشركة</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">اتصل بنا</a>
+                    </li>
+                </ul>
+                <a href="consultation.html" class="btn btn-accent">طلب استشارة</a>
+            </div>
+        </div>
+    </nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">نحو مستقبل عمراني متطور</h1>
+                <p class="lead mb-5">نقدم حلولاً هندسية متكاملة تجمع بين الإبداع المعماري والدقة الإنشائية لإنشاء مباني تتحدى الزمن</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="#projects" class="btn btn-accent">تصفح مشاريعنا</a>
+                    <a href="consultation.html" class="btn btn-outline-light">طلب استشارة</a>
+                    <a href="#contact" class="btn btn-outline-light">تواصل معنا</a>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0 position-relative">
+                <div class="image-frame">
+                    <img src="https://img.freepik.com/free-photo/promenade-canal-dubai-marina-with-luxury-skyscrapers-around-united-arab-emirates_231208-7556.jpg?t=st=1746248724~exp=1746252324~hmac=d24002fff12604414bb05a377deaa143fad70b6499fd87276741752f891fdf4c&w=826" alt="التصميم المعماري" class="img-fluid rounded-4 floating shadow-lg w-75 mx-auto d-block">
+                </div>
+                <div class="pattern-overlay"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5 my-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">خدماتنا الهندسية</h2>
+                <p class="text-muted">نقدم مجموعة متكاملة من الخدمات الهندسية بمعايير عالمية</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="card h-100 border-0">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-drafting-compass"></i>
+                            </div>
+                            <h3 class="h4 mb-3">التصميم المعماري</h3>
+                            <p class="text-muted">تصميمات معمارية مبتكرة تلبي احتياجات العملاء مع مراعاة الجماليات والوظيفية والاستدامة</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">المزيد</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 border-0">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-ruler-combined"></i>
+                            </div>
+                            <h3 class="h4 mb-3">الإنشاءات المدنية</h3>
+                            <p class="text-muted">تنفيذ مشاريع إنشائية بدقة عالية وفق أحدث المواصفات والمعايير العالمية</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">المزيد</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 border-0">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h3 class="h4 mb-3">التصميم الداخلي</h3>
+                            <p class="text-muted">تصاميم داخلية فريدة تجمع بين الراحة والجمال والكفاءة في استخدام المساحات</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">المزيد</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="card h-100 border-0">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <h3 class="h4 mb-3">التخطيط العمراني</h3>
+                            <p class="text-muted">تخطيط مدن ومجتمعات عمرانية متكاملة تراعي احتياجات السكان والبيئة</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">المزيد</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 border-0">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <h3 class="h4 mb-3">إدارة المشاريع</h3>
+                            <p class="text-muted">إدارة متكاملة للمشاريع الإنشائية من التخطيط حتى التسليم النهائي</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">المزيد</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 border-0">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-solar-panel"></i>
+                            </div>
+                            <h3 class="h4 mb-3">البناء المستدام</h3>
+                            <p class="text-muted">حلول بناء صديقة للبيئة تعتمد على تقنيات الاستدامة وترشيد الطاقة</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">المزيد</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="stats-box">
+                        <div class="stats-number">+250</div>
+                        <h5 class="mb-0">مشروع منجز</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stats-box">
+                        <div class="stats-number">15</div>
+                        <h5 class="mb-0">جائزة عالمية</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stats-box">
+                        <div class="stats-number">50</div>
+                        <h5 class="mb-0">مهندس متخصص</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stats-box">
+                        <div class="stats-number">100%</div>
+                        <h5 class="mb-0">رضا العملاء</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5 my-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">أبرز مشاريعنا</h2>
+                <p class="text-muted">إبداعات معمارية تفتخر بها</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="مشروع ناطحة سحاب">
+                        <div class="project-overlay">
+                            <h4 class="text-white">برج الأعمال العالمي</h4>
+                            <p class="text-white-50 mb-0">تصميم وإنشاء برج تجاري فاخر بارتفاع 40 طابق</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <img src="https://img.freepik.com/free-photo/vertical-shot-modern-apartments-daytime_181624-13625.jpg?ga=GA1.1.390124378.1737159155&semt=ais_hybrid&w=740" alt="مشروع فيلا فاخرة">
+                        <div class="project-overlay">
+                            <h4 class="text-white">مجمع الفلل السكنية</h4>
+                            <p class="text-white-50 mb-0">تصميم وتنفيذ 20 فيلا فاخرة بمساحات مختلفة</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="مشروع مجمع تجاري">
+                        <div class="project-overlay">
+                            <h4 class="text-white">منازل كلاسيكية انيقة</h4>
+                            <p class="text-white-50 mb-0">تصميم وإنشاء منازل كلاسيكية متكاملة الخدمات</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="مشروع منزل عصري">
+                        <div class="project-overlay">
+                            <h4 class="text-white">المنزل العصري المستدام</h4>
+                            <p class="text-white-50 mb-0">تصميم منزل عصري يعتمد على مفاهيم الاستدامة</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <img src="https://www.assetworldcorp-th.com/storage/portfolio/hospitality/marriott-queens-park/cover.jpg" alt="مشروع فندق فاخر">
+                        <div class="project-overlay">
+                            <h4 class="text-white">الفندق الدولي الفاخر</h4>
+                            <p class="text-white-50 mb-0">تصميم داخلي وخارجي لفندق 5 نجوم</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <img src="https://img.freepik.com/free-photo/3d-room-interior-with-classic-design-furniture_23-2150895588.jpg?t=st=1746254790~exp=1746258390~hmac=2c530599df20b23c6de01e4fe9e8931595018cdd515759741230befb5ab1068e&w=1800" alt="مشروع تصميم داخلي">
+                        <div class="project-overlay">
+                            <h4 class="text-white">التصميم الداخلي الفاخر</h4>
+                            <p class="text-white-50 mb-0">تصميم داخلي لشقق سكنية فاخرة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <!-- <a href="#" class="btn btn-primary px-5">عرض مشاريع اخرى</a> -->
+            </div>
+                    <!-- Additional Projects (Hidden Initially) -->
+        <div class="row g-4 mt-4" id="more-projects" style="display: none;">
+            <!-- Will be populated by JavaScript -->
+        </div>
+        
+        <div class="text-center mt-5">
+            <button id="show-more-projects" class="btn btn-primary px-5">عرض المزيد من المشاريع</button>
+        </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="section-title">آراء عملائنا</h2>
+                <p class="text-muted">ما يقوله عملاؤنا عن تجربتهم مع بنيان</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="client-img me-3" alt="عميل">
+                            <div>
+                                <h5 class="mb-0">أحمد السيد</h5>
+                                <small class="text-muted">مالك مشروع سكني</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"تعاملت مع فريق بنيان في مشروع فيلتي الخاصة، وكانت النتيجة تتجاوز كل توقعاتي. الاهتمام بالتفاصيل والإبداع في التصميم كانا مميزين حقاً."</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="client-img me-3" alt="عميلة">
+                            <div>
+                                <h5 class="mb-0">د. منى عبدالله</h5>
+                                <small class="text-muted">مديرة شركة عقارية</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"شركة بنيان شريكنا المفضل في المشاريع العقارية. دقة التنفيذ والتزامهم بالمواعيد يجعل التعامل معهم تجربة ممتازة دائماً."</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" class="client-img me-3" alt="عميل">
+                            <div>
+                                <h5 class="mb-0">محمود الكمالي</h5>
+                                <small class="text-muted">مدير تنفيذي</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"المبنى الإداري الذي صممه ونفذه فريق بنيان أصبح علامة مميزة في المدينة. التصميم العصري والجودة العالية في التنفيذ كانا فوق كل تقدير."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section py-5">
+        <div class="container py-5 text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="display-5 fw-bold mb-4">لبدء مشروعك القادم معنا</h2>
+                    <p class="lead mb-5">تواصل مع فريقنا اليوم واحصل على استشارة مجانية لمشروعك</p>
+                    <a href="consultation.html" class="btn btn-accent btn-lg px-5 me-3">اطلب استشارة</a>
+                    <a href="tel:+966123456789" class="btn btn-outline-light btn-lg px-5">اتصل بنا الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="mb-4">
+                        <span class="logo text-white">
+                            بنيان
+                            <i class="fas fa-building logo-icon"></i>
+                        </span>
+                    </div>
+                    <p class="text-white-50 mb-4">شركة رائدة في مجال التصميم المعماري والهندسة المدنية، نقدم حلولاً متكاملة تجمع بين الإبداع والدقة الهندسية.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">روابط سريعة</h5>
+                    <div class="footer-links">
+                        <a href="#">الرئيسية</a>
+                        <a href="#services">خدماتنا</a>
+                        <a href="#projects">مشاريعنا</a>
+                        <a href="#about">عن الشركة</a>
+                        <a href="#contact">اتصل بنا</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">خدماتنا</h5>
+                    <div class="footer-links">
+                        <a href="#">التصميم المعماري</a>
+                        <a href="#">الإنشاءات المدنية</a>
+                        <a href="#">التصميم الداخلي</a>
+                        <a href="#">التخطيط العمراني</a>
+                        <a href="#">البناء المستدام</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="text-white mb-4">اتصل بنا</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i> القاهرة، جمهورية مصر العربية</li>
+                        <li class="mb-3"><i class="fas fa-phone me-2"></i> +966 12 345 6789</li>
+                        <li class="mb-3"><i class="fas fa-envelope me-2"></i> info@bunyan.com</li>
+                        <li class="mb-3"><i class="fas fa-clock me-2"></i> الأحد - الخميس: 8 ص - 5 م</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-white-20">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-white-50 mb-0">© 2023 بنيان. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <ul class="list-inline small mb-0">
+                        <li class="list-inline-item"><a href="#" class="text-white-50 text-decoration-none">شروط الخدمة</a></li>
+                        <li class="list-inline-item"><span class="text-white-50">·</span></li>
+                        <li class="list-inline-item"><a href="#" class="text-white-50 text-decoration-none">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+            // Additional projects data
+    const moreProjects = [
+        {
+            img: "https://img.freepik.com/free-photo/office-buildings-with-modern-architecture_107420-95734.jpg?ga=GA1.1.390124378.1737159155&semt=ais_hybrid&w=740",
+            title: "المجمع السكني الحديث",
+            desc: "تصميم وتنفيذ مجمع سكني عصري بمواصفات عالمية"
+        },
+        {
+            img: "https://btbuildingservices.com/wp-content/uploads/2022/07/Medical-Space-scaled.jpeg",
+            title: "المركز الطبي المتخصص",
+            desc: "تصميم وإنشاء مركز طبي متكامل الخدمات"
+        },
+        {
+            img: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+            title: "الفلل الذكية",
+            desc: "تصميم فلل بتقنيات المنازل الذكية والتحكم الآلي"
+        },
+        {
+            img: "https://img.freepik.com/free-photo/interior-design-neoclassical-style-with-furnishings-decor_23-2151199356.jpg?ga=GA1.1.390124378.1737159155&semt=ais_hybrid&w=740",
+            title: "المكتب الإداري الراقي",
+            desc: "تصميم داخلي لمكاتب إدارية بلمسات فاخرة"
+        },
+        {
+            img: "https://i.pinimg.com/originals/d2/25/72/d225725cf670d26f87007801f43f061a.jpg",
+            title: "قصور فاخرة",
+            desc: "تصميم وتنفيذ قصور سكنية بمساحات كبيرة"
+        },
+        {
+            img: "https://img.freepik.com/free-photo/restaurant-hall-with-turquoise-chairs-white-walls-french-windows-curtains_140725-8450.jpg?ga=GA1.1.390124378.1737159155&semt=ais_hybrid&w=740",
+            title: "المطاعم خمس نجوم",
+            desc: "تصميم داخلي لمطاعم بتصاميم عصرية وجذابة"
+        }
+    ];
+
+    // Show More Button Functionality
+    document.getElementById('show-more-projects').addEventListener('click', function() {
+        const moreProjectsContainer = document.getElementById('more-projects');
+        const button = this;
+        
+        if(moreProjectsContainer.style.display === 'none') {
+            // Add additional projects
+            moreProjects.forEach(project => {
+                moreProjectsContainer.innerHTML += `
+                    <div class="col-lg-4 col-md-6">
+                        <div class="project-card">
+                            <img src="${project.img}" alt="${project.title}">
+                            <div class="project-overlay">
+                                <h4 class="text-white">${project.title}</h4>
+                                <p class="text-white-50 mb-0">${project.desc}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            moreProjectsContainer.style.display = 'flex';
+            button.textContent = 'عرض اقل';
+            button.classList.add('active');
+        } else {
+            moreProjectsContainer.style.display = 'none';
+            button.textContent = 'Show More Projects';
+            button.classList.remove('active');
+        }
+        
+        // Refresh animations for new elements
+        AOS.refresh();
+    });
+    </script>
+</body>
+</html>
